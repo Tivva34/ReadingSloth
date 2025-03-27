@@ -1,0 +1,187 @@
+/* Global styling */
+body {
+  margin: 0;
+  font-family: "Arial", sans-serif;
+  background: linear-gradient(to bottom, #000c26, #1a1a2e);
+  color: white;
+}
+
+/* Header styling*/
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 50px;
+  background-color: #000c26;
+  color: white;
+}
+header .logo {
+  display: flex;
+  align-items: center;
+}
+header .logo:hover {
+ cursor: pointer;
+}
+header .logo img {
+  width: 100px;
+  height: 100px;
+  
+}
+header .title {
+  flex-grow: 1;
+  text-align: center;
+  font-size: 1.5rem; 
+  font-weight: bold;
+  color: white; 
+  
+}
+
+
+/* app styling */
+.app {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Book list container */
+.book-list {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); 
+  gap: 20px;
+  padding: 50px;
+  justify-items: center; 
+  width: 100%; 
+  box-sizing: border-box; 
+}
+
+
+/* Individuella book cards */
+.book-card {
+  background-color: white;
+  color: black;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 300px;
+  min-height: 400px;
+  box-sizing: border-box; 
+  display: flex;
+  flex-direction: column; 
+  justify-content: space-between; 
+  margin-bottom:20px;
+}
+.book-card:hover {
+  background-color: #b1eeee;
+}
+
+/* Book title */
+.book-card h3 {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+
+.book-card p {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+/* Author text */
+.book-card .author {
+  font-style: italic;
+  color: gray;
+}
+.book-card .genre{
+  font-style: italic;
+  color: gray;
+}
+/* Add to cart button */
+.book-card button {
+  background-color: #2a9d8f;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-top: auto; /* plasera knappen på botten av kortet */
+}
+
+.book-card button:hover {
+  background-color: #21867a;
+}
+
+/* Cart styling */
+.cart {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 18px;
+  color: white;
+  cursor: pointer;
+}
+.cart-count {
+  background-color: white;
+  color: black;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+}
+.cart:hover{
+color: #a7a1a1;
+}
+
+.cart .text {
+  font-weight: bold;
+}
+
+.cart .cartCount {
+  background-color: white;
+  color: black;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+}
+.cart:hover .cartCount:hover{
+  background-color: #a7a1a1;
+}
+
+
+/* Media queries */
+
+@media (max-width: 1200px) {
+  .book-list {
+    grid-template-columns: repeat(4, 1fr); 
+  }
+}
+
+
+@media (max-width: 992px) {
+  .book-list {
+    grid-template-columns: repeat(3, 1fr); 
+  }
+}
+
+
+@media (max-width: 768px) {
+  .book-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+@media (max-width: 480px) {
+  .book-list {
+    grid-template-columns: 1fr; 
+  }
+}
