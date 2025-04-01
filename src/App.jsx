@@ -10,10 +10,14 @@ const App = () => {
     setCartCount(cartCount + 1);
   };
 
+  const handleRemoveFromCart = () => {
+    setCartCount((prevCount) => Math.max(prevCount - 1, 0)); // Förhindra negativa värden
+  };
+
   return (
     <div className="app">
       <Header cartCount={cartCount} />
-      <BookList onAddToCart={handleAddToCart} />
+      <BookList onAddToCart={handleAddToCart} onRemoveFromCart={handleRemoveFromCart} />
     </div>
   );
 };
