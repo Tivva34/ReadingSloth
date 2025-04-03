@@ -20,27 +20,25 @@ header .logo {
   align-items: center;
 }
 header .logo:hover {
- cursor: pointer;
+  cursor: pointer;
 }
 header .logo img {
   width: 100px;
   height: 100px;
-  
 }
 header .title {
   flex-grow: 1;
   text-align: center;
-  font-size: 1.5rem; 
+  font-size: 1.5rem;
   font-weight: bold;
-  color: white; 
-  
+  color: white;
 }
 
-
-/* app styling */
+/* App styling */
 .app {
   display: flex;
   flex-direction: column;
+  min-height: 100vh;  
 }
 
 /* Book list container */
@@ -53,7 +51,6 @@ header .title {
   width: 100%; 
   box-sizing: border-box; 
 }
-
 
 /* Individuella book cards */
 .book-card {
@@ -72,7 +69,7 @@ header .title {
   margin-bottom:20px;
 }
 .book-card:hover {
-  background-color: #b1eeee;
+  background-color:rgb(245, 239, 239);
 }
 
 /* Book title */
@@ -81,11 +78,11 @@ header .title {
   font-weight: bold;
 }
 
-
 .book-card p {
   font-size: 14px;
   margin-bottom: 10px;
 }
+
 /* Author text */
 .book-card .author {
   font-style: italic;
@@ -95,6 +92,7 @@ header .title {
   font-style: italic;
   color: gray;
 }
+
 /* Add to cart button */
 .book-card button {
   background-color: #2a9d8f;
@@ -104,15 +102,15 @@ header .title {
   cursor: pointer;
   border-radius: 5px;
   font-size: 16px;
-  margin-top: auto; /* plasera knappen på botten av kortet */
+  margin-top: auto; /* Placerar knappen på botten av kortet */
 }
 
 .book-card button:hover {
   background-color: #21867a;
 }
 
-/* Cart styling */
-.cart {
+/* Cart styling - kombinera text och räknare */
+.cart-wrapper {
   display: flex;
   align-items: center;
   gap: 5px;
@@ -120,6 +118,11 @@ header .title {
   color: white;
   cursor: pointer;
 }
+
+.cart-wrapper:hover {
+  color: #a7a1a1; 
+}
+
 .cart-count {
   background-color: white;
   color: black;
@@ -131,31 +134,19 @@ header .title {
   justify-content: center;
   font-size: 14px;
   font-weight: bold;
-}
-.cart:hover{
-color: #a7a1a1;
+  margin-top: 10px;
 }
 
-.cart .text {
+.cart-count:hover {
+  background-color: #8d8a8a; 
+}
+
+.cart-wrapper .text {
   font-weight: bold;
+  margin-top: 10px;
 }
 
-.cart .cartCount {
-  background-color: white;
-  color: black;
-  border-radius: 50%;
-  width: 22px;
-  height: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  font-weight: bold;
-}
-.cart:hover .cartCount:hover{
-  background-color: #a7a1a1;
-}
-
+/* Cart buttons */
 .cart-buttons {
   display: flex;
   align-items: center;
@@ -165,7 +156,7 @@ color: #a7a1a1;
 }
 
 .cart-buttons button {
-  background-color: #2a9d8f;
+  background-color: #1f6594;
   color: white;
   border: none;
   padding: 8px 12px;
@@ -176,7 +167,7 @@ color: #a7a1a1;
 }
 
 .cart-buttons button:hover {
-  background-color: #21867a;
+  background-color: #0e588a;
 }
 
 .count {
@@ -186,28 +177,104 @@ color: #a7a1a1;
   text-align: center;
 }
 
-/* Media queries */
+.logout-button {
+  background-color: #c51028; 
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 6rem;
+  height: 2rem; 
+  margin-left: 1rem;
+  text-align: center;
+  padding: 4px 0; 
+}
 
+.logout-button:hover {
+  background-color: #d62828; 
+}
+
+/* För att centrera loginformuläret */
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; 
+  background: rgba(0, 0, 0, 0.7); 
+}
+
+/* Formulärens container */
+.form-container {
+  border: 1px solid rgb(204, 198, 198);
+  background-color: rgb(55, 12, 209);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+/* Titel för login och register */
+.form-container h2 {
+  color: white;
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Input-fält */
+input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+/* Knapp och submit-stilar */
+input[type="submit"], button {
+  background-color: #19a0df;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 10px;
+}
+
+/* Hover-effekt för knappar */
+button:hover, input[type="submit"]:hover {
+  background-color: #1477a5;
+}
+
+/* Länk för att byta mellan Login och Register */
+.form-container p {
+  color: white;
+  text-align: center;
+}
+
+/* Media queries */
 @media (max-width: 1200px) {
   .book-list {
     grid-template-columns: repeat(4, 1fr); 
   }
 }
 
-
 @media (max-width: 992px) {
   .book-list {
-    grid-template-columns: repeat(3, 1fr); 
+    grid-template-columns: repeat(3, 1fr);
   }
 }
-
 
 @media (max-width: 768px) {
   .book-list {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr); 
   }
 }
-
 
 @media (max-width: 480px) {
   .book-list {
