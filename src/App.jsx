@@ -1,74 +1,111 @@
-import React, { useState } from "react";
-import usersData from "./data/users";  
-import LoginForm from "./components/LoginForm";  
-import RegisterForm from "./components/RegisterForm"; 
-import BookList from "./components/BookList";  
-import Header from "./components/Header";  
-import "./index.css";  
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import usersData from "./data/users";
+import LoginForm from "./components/LoginForm";
+import RegisterForm from "./components/RegisterForm";
+import BookList from "./components/BookList";
+import BookPage from "./components/BookPage";
+import Header from "./components/Header";
+import "./index.css";
 
 const App = () => {
-    const [users, setUsers] = useState(usersData);  // State för användardata
-    const [activeUser, setActiveUser] = useState(null);  // State för att hålla koll på inloggad användare
-    const [showRegister, setShowRegister] = useState(false);  // State för att visa registreringsformulär
-    const [cartCount, setCartCount] = useState(0);  // State för att hålla koll på kundvagnens räknare
+  const [users, setUsers] = useState(usersData);
+  const [activeUser, setActiveUser] = useState(null);
+  const [showRegister, setShowRegister] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
 
-    // Funktion för inloggning
-    const handleLogin = (username, password) => {
-        const user = users.find(u => u.username === username && u.password === password);  // Hitta användare med matching användarnamn och lösenord
-        if (user) {
-            setActiveUser(user);  // Sätt den aktiva användaren om inloggningen lyckades
-        } else {
-            alert("Invalid credentials");  // Visa varning om inloggningen misslyckas
-        }
-    };
+  // Kontrollera om det finns en aktiv användare i localStorage när sidan laddas
+  useEffect(() => {
+    const savedUser = localStorage.getItem("activeUser");
+    if (savedUser) {
+      setActiveUser(JSON.parse(savedUser));
+    }
 
-    // Funktion för registrering
-    const handleRegister = (username, password) => {
-        if (users.some(u => u.username === username)) {  // Kontrollera om användarnamnet redan finns
-            alert("Username already taken");  // Visa varning om användarnamnet redan är upptaget
-            return;
-        }
-        const newUser = { username, password };  // Skapa ett nytt användarobjekt
-        setUsers([...users, newUser]);  // Lägg till den nya användaren i användardata
-        alert("Registration successful! Please log in.");  // Visa bekräftelsemeddelande
-        setShowRegister(false);  // Stäng registreringsformuläret
-    };
+    // Ladda varukorgens antal från localStorage
+    const savedCartCount = localStorage.getItem("cartCount");
+    if (savedCartCount) {
+      setCartCount(Number(savedCartCount));
+    }
+  }, []);
 
-    // Funktion för att logga ut användaren
-    const handleLogout = () => {
-        setActiveUser(null);  // Återställ aktiv användare
-        setCartCount(0);  // Återställ kundvagnens räknare vid utloggning
-    };
+  // Spara aktiv användare till localStorage varje gång den ändras
+  useEffect(() => {
+    if (activeUser) {
+      localStorage.setItem("activeUser", JSON.stringify(activeUser));
+    }
+  }, [activeUser]);
 
-    // Funktion för att lägga till i kundvagnen
-    const handleAddToCart = () => {
-        setCartCount(prevCount => prevCount + 1);  // Öka räknaren med 1
-    };
+  // Hantera inloggningsåtgärden
+  const handleLogin = (username, password) => {
+    const user = users.find(u => u.username === username && u.password === password);
+    if (user) {
+      setActiveUser(user);
+    } else {
+      alert("Ogiltiga inloggningsuppgifter");
+    }
+  };
 
-    // Funktion för att ta bort från kundvagnen
-    const handleRemoveFromCart = () => {
-        setCartCount(prevCount => (prevCount > 0 ? prevCount - 1 : 0));  // Minska räknaren, men inte under 0
-    };
+  // Hantera utloggningsåtgärden
+  const handleLogout = () => {
+    setActiveUser(null);
+    setCartCount(0); // Återställ varukorgens antal vid utloggning
+    localStorage.removeItem("activeUser"); // Ta bort aktiv användare från localStorage
+  };
 
-    return (
-        <div className="app">
-            {activeUser ? (
-                // Om en användare är inloggad, visa Header och BookList-komponenter
-                <>
-                    <Header cartCount={cartCount} onLogout={handleLogout} />
-                    <BookList onAddToCart={handleAddToCart} onRemoveFromCart={handleRemoveFromCart} />
-                </>
-            ) : showRegister ? (
-                // Om användaren vill registrera sig, visa RegisterForm
-                <RegisterForm onRegister={handleRegister} switchToLogin={() => setShowRegister(false)} />
-            ) : (
-                // Om ingen användare är inloggad, visa LoginForm
-                <div className="login-page">
-                    <LoginForm onLogin={handleLogin} switchToRegister={() => setShowRegister(true)} />
-                </div>
-            )}
-        </div>
-    );
+  // Hantera att lägga till varor i varukorgen
+  const handleAddToCart = () => {
+    setCartCount(prevCount => prevCount + 1);
+  };
+
+  // Hantera att ta bort varor från varukorgen
+  const handleRemoveFromCart = () => {
+    setCartCount(prevCount => (prevCount > 0 ? prevCount - 1 : 0));
+  };
+
+  // Hantera användarregistrering
+  const handleRegister = (username, password) => {
+    // Kontrollera om användarnamnet redan finns
+    if (users.some(u => u.username === username)) {
+      alert("Användarnamnet är redan taget");
+      return;
+    }
+
+    // Skapa en ny användare och lägg till den i användarlistan
+    const newUser = { username, password };
+    setUsers([...users, newUser]);
+    alert("Registreringen var lyckad! Vänligen logga in.");
+    setShowRegister(false); // Byt till inloggningsformulär efter registrering
+  };
+
+  // Spara varukorgens antal i localStorage vid omladdning av sidan
+  useEffect(() => {
+    localStorage.setItem("cartCount", cartCount); // Spara varukorgens antal till localStorage
+  }, [cartCount]);
+
+  return (
+    <Router>
+      <div className="app">
+        {activeUser ? (
+          <>
+            <Header cartCount={cartCount} onLogout={handleLogout} />
+            <Routes>
+              <Route
+                path="/"
+                element={<BookList onAddToCart={handleAddToCart} onRemoveFromCart={handleRemoveFromCart} />}
+              />
+              <Route path="/book/:id" element={<BookPage />} />
+            </Routes>
+          </>
+        ) : showRegister ? (
+          <RegisterForm onRegister={handleRegister} switchToLogin={() => setShowRegister(false)} />
+        ) : (
+          <div className="login-page">
+            <LoginForm onLogin={handleLogin} switchToRegister={() => setShowRegister(true)} />
+          </div>
+        )}
+      </div>
+    </Router>
+  );
 };
 
 export default App;

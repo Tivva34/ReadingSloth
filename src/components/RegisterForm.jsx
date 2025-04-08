@@ -11,7 +11,7 @@ const RegisterForm = ({ onRegister, switchToLogin }) => {
 
     return (
         <div className="login-page"> {}
-            <div className="form-container"> {}
+            <div className="form-container"> 
                 <h2>Register</h2>
                 <form onSubmit={handleSubmit}>
                     <input
