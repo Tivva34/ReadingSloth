@@ -85,13 +85,16 @@ align-self: center;}
 }
 
 /* Author text */
-.book-card .author {
+.book-card .author,
+.book-card .genre {
   font-style: italic;
   color: gray;
-}
-.book-card .genre{
-  font-style: italic;
-  color: gray;
+  text-align: center;
+  width: 100%;
+  padding: 0;
+  box-sizing: border-box;
+  margin: 6px 0;
+  align-self: center;
 }
 
 /* Add to cart button */
@@ -103,14 +106,14 @@ align-self: center;}
   cursor: pointer;
   border-radius: 5px;
   font-size: 15px;
-  margin-top: auto; /* Placerar knappen på botten av kortet */
+  margin-top: auto;
 }
 
 .book-card button:hover {
   background-color: #21867a;
 }
 
-/* Cart styling - kombinera text och räknare */
+/* Cart styling */
 .cart-wrapper {
   display: flex;
   align-items: center;
