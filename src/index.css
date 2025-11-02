@@ -44,29 +44,30 @@ header .title {
 /* Book list container */
 .book-list {
   display: grid;
-  grid-template-columns: repeat(5, 1fr); 
-  gap: 20px;
-  padding: 50px;
-  justify-items: center; 
-  width: 100%; 
-  box-sizing: border-box; 
-}
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  padding: 30px;
+  justify-items: center;
+  width: 80%;
+  box-sizing: border-box;
+
+align-self: center;}
 
 /* Individuella book cards */
 .book-card {
   background-color: white;
   color: black;
-  padding: 20px;
+  padding: 14px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
   text-align: center;
-  max-width: 300px;
-  min-height: 400px;
-  box-sizing: border-box; 
+  max-width: 260px;
+  min-height: 340px;
+  box-sizing: border-box;
   display: flex;
-  flex-direction: column; 
-  justify-content: space-between; 
-  margin-bottom:20px;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 16px;
 }
 .book-card:hover {
   background-color:rgb(245, 239, 239);
@@ -74,13 +75,13 @@ header .title {
 
 /* Book title */
 .book-card h3 {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
 }
 
 .book-card p {
-  font-size: 14px;
-  margin-bottom: 10px;
+  font-size: 13px;
+  margin-bottom: 8px;
 }
 
 /* Author text */
@@ -98,10 +99,10 @@ header .title {
   background-color: #2a9d8f;
   color: white;
   border: none;
-  padding: 10px;
+  padding: 8px;
   cursor: pointer;
   border-radius: 5px;
-  font-size: 16px;
+  font-size: 15px;
   margin-top: auto; /* Placerar knappen på botten av kortet */
 }
 
@@ -159,10 +160,10 @@ header .title {
   background-color: #1f6594;
   color: white;
   border: none;
-  padding: 8px 12px;
+  padding: 6px 10px;
   cursor: pointer;
   border-radius: 5px;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
 }
 
